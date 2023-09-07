@@ -1,26 +1,44 @@
 function parseHTML(htmlString) {
-    const regex = /<(\w+)([^>]*)>([^<]*)<\/\1>/g;
+    const regex = /<(\w+)([^>]*)>([\s\S]*?)<\/\1>/g;
     let match;
-    const output = [];
-    
+    let output = null;
+
+    const children = [];
+
     while ((match = regex.exec(htmlString)) !== null) {
         const tag = match[1];
         const attributes = match[2];
-        const innerText = match[3].trim();
-
+        const innerContent = match[3].trim();
         const parsedAttributes = parseAttributes(attributes);
+
         const child = {
             tag,
-            ...parsedAttributes,
+            ...parsedAttributes
         };
-        if (innerText) {
-            child.text = innerText;
+
+        // Check if innerContent has other tags or is just text
+        if (/<(\w+)([^>]*)>([\s\S]*?)<\/\1>/.test(innerContent)) {
+            child.children = parseHTML(innerContent);
+        } else {
+            child.text = innerContent;
         }
 
-        output.push(child);
+        children.push(child);
     }
 
-    return output[0];  // Assuming the root node is always a single element.
+    if (children.length === 1 && !output) {
+        output = children[0];
+    } else {
+        output = { children };
+    }
+
+    // Extract any text that's outside of child tags
+    const remainingText = htmlString.replace(regex, '').trim();
+    if (remainingText) {
+        output.text = remainingText;
+    }
+
+    return output;
 }
 
 function parseAttributes(attributes) {
