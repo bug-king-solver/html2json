@@ -31,7 +31,12 @@ To use the HTML to JSON converter, you can do the following:
 ```javascript
 const parseHTML = require("html2jsonconvertor");
 
-const html = '<div style="background-color: yellow">Hello, World</div>';
+const html = `
+    <div style="background-color: yellow; font-size: 14px" id="first-div"> 
+        Hello, friends 
+        <p class="para" style="font-faimly: monospace; font-size: 11px"> Lorem ipsum dolor sit </p>
+        <footer style="width: auto; height: 100px; color: blue"> <span> This is the end </span> </footer>
+    </div>`;
 const json = parseHTML(html);
 
 console.log(json);
