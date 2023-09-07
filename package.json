@@ -1,6 +1,6 @@
 {
   "name": "html2jsonconvertor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A tool for converting HTML to JSON.",
   "main": "index.js",
   "repository": {
