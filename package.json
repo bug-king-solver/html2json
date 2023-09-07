@@ -1,16 +1,24 @@
 {
-  "name": "html2json",
+  "name": "html2jsonconvertor",
   "version": "1.0.0",
-  "description": "",
+  "description": "A tool for converting HTML to JSON.",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bug-king-solver/html2json.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
-    "start": "nodemon ./src/server.js",
+    "start": "node ./src/server.js",
+    "dev": "nodemon ./src/server.js",
     "test": "jest"
   },
   "jest": {
     "testEnvironment": "node"
   },
-  "keywords": [],
+  "keywords": ["HTML", "JSON", "parser", "conversion"],
   "author": "",
   "license": "ISC",
   "dependencies": {
