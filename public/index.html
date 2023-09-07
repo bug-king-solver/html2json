@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML to Object Converter</title>
+</head>
+<body>
+    <div style="max-width: 600px; margin: 50px auto; padding: 20px; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <h2>HTML to Object Converter</h2>
+        <textarea id="htmlInput" style="width: 100%; height: 200px;"></textarea>
+        <button onclick="convertHtml()">Convert</button>
+        <h3>Result:</h3>
+        <pre id="output"></pre>
+    </div>
+
+    <script>
+        function convertHtml() {
+            const html = document.getElementById('htmlInput').value;
+            fetch('http://localhost:3000/parse', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ html })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const outputEl = document.getElementById('output');
+                outputEl.textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
