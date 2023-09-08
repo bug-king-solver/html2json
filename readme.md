@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a JavaScript program that converts HTML code to a JSON object.
+This is a node module that converts HTML code to a JSON object.
 
 ## Table of Contents
 
